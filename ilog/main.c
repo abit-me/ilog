@@ -9,18 +9,22 @@
 #include <stdio.h>
 #include <CoreFoundation/CoreFoundation.h>
 #include <regex.h>
+#include <wchar.h>
 
 #include "device_id.h"
 #include "device_log.h"
 #include "sds.h"
 #include "color_log.h"
 
+#define LINE_REGEX "(\\w+\\s+\\d+\\s+\\d+:\\d+:\\d+)\\s+(\\S+|)\\s+(\\w+)\\[(\\d+)\\]\\s+\\<(\\w+)\\>:\\s(.*)"
+
 typedef struct {
-    bool show_date_and_name;    // if show date and device name
-    bool show_process_name;     // if show process name
-    bool show_colored_log;      // if show log with color
-    char * filter_ps_list[5];   // show log by process name list
-    char * filter_keyword;      // don't show if start with keyword
+    bool show_date_and_name;        // if show date and device name
+    bool show_process_name;         // if show process name
+    bool show_colored_log;          // if show log with color
+    char * filter_in_ps_list[5];    // show log by process name list
+    char * filter_in_keyword;       // show log by start with keyword
+    char * filter_out_keyword;      // don't show if start with keyword
 } log_cfg;
 
 log_cfg cfg;
@@ -139,9 +143,9 @@ sds get_process_name(sds log) {
 //    const char *buffer = log;
 //    int o = find_space_offsets(buffer, length, space_offsets);
 //    printf("%d", o);
-    
+    printf("start regex\n");
     regex_t reg;
-    char regex[] = "[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}";
+    char regex[] = LINE_REGEX;
     size_t nmatch = 1;
     regmatch_t pmatch[1];
     char errbuf[100];
@@ -173,6 +177,7 @@ sds get_process_name(sds log) {
     
     //Free &reg used in recomp
     regfree(&reg);
+    printf("end regex\n");
     return NULL;
 }
 
@@ -243,7 +248,15 @@ void handle_log(sds log)
             //write_fully(STDOUT_FILENO, buffer, length);
         }
     } else {
-        printf("%s\n", log);
+        
+//        printf("%s\n", log);
+//        size_t keyword_len = strlen(cfg.filter_in_keyword);
+//        if (memcmp(log, cfg.filter_in_keyword, keyword_len) == 0) {
+//            printf("%s\n", log);
+//        }
+        if (strstr(log, "xxooxxooxxoo = ") != 0) {
+            wprintf("%s\n", (wchar_t *)log);
+        }
     }
     
 //    const char * process_name = get_process_name(log);
@@ -259,17 +272,20 @@ void log_callback(sds log)
 
 int main(int argc, const char * argv[])
 {
+    char *local = setlocale(LC_ALL, "");
+    printf("local: %s\n", local);
     
     cfg.show_date_and_name = true;
     cfg.show_process_name = true;
     cfg.show_colored_log = false;
-    cfg.filter_keyword = "SpringBoard";
-    cfg.filter_ps_list[0] = "SpringBoard";
-    cfg.filter_ps_list[1] = "com.mobyapps.watchdogd";
+    cfg.filter_in_keyword = "xxx";
+    cfg.filter_out_keyword = "ooo";
+    cfg.filter_in_ps_list[0] = "SpringBoard";
+    cfg.filter_in_ps_list[1] = "com.mobyapps.watchdogd";
     
     CFMutableArrayRef arr = get_device_ids();
     CFIndex count = CFArrayGetCount(arr);
-
+    
     if (arr == NULL) {
         printf("find iOS device failed\n");
         return 1;
@@ -279,8 +295,8 @@ int main(int argc, const char * argv[])
         CFRelease(arr);
         return 2;
     } else if (count == 1) {
-        const char *udid = CFArrayGetValueAtIndex(arr, 0);
-        device_log_cb(udid, log_callback);
+        ideviceid ret_idevid = id_from_arr(arr, 0);
+        device_log_cb(ret_idevid.udid, log_callback);
     } else if (count >=2) {
         
         printf(COLOR_BLUE);
