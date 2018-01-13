@@ -35,6 +35,9 @@ int device_log(const char *devid);
 static void syslog_callback(char c, void *user_data)
 {
     if (c != '\n') {
+        if (~(c >> 8) == 0) {
+            printf("is chinese\n");
+        }
         a_line_log = sdscatprintf(a_line_log, "%c", c);
     } else {
         callback(a_line_log);
