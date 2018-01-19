@@ -284,12 +284,13 @@ int main(int argc, const char * argv[])
     cfg.filter_in_ps_list[1] = "com.mobyapps.watchdogd";
     
     CFMutableArrayRef arr = get_device_ids();
-    CFIndex count = CFArrayGetCount(arr);
     
     if (arr == NULL) {
         printf("find iOS device failed\n");
         return 1;
     }
+    
+    CFIndex count = CFArrayGetCount(arr);
     if (count == 0) {
         printf("no iOS device connected\n");
         CFRelease(arr);
