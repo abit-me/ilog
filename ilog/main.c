@@ -181,18 +181,51 @@ sds get_process_name(sds log) {
     return NULL;
 }
 
+/*
+
+ 正则表达式示例表
+ 字 符 意 义 示 例
+ * 任意长度的字符串。 a* 表示: 空字符串、aaaa、a…
+ ? 长度为0或者1的字符串。 a? 表示: 空字符串和a。
+ + 长度为一个或者多个的字符串。 a+表示:a、aa、aaaaaa…
+ . 任意字符。 a. 表示:a后跟任意字符。
+ {} 代表上一规则重复数目、
+ {1,1,s}包含一组匹配花括号，里面有两个数字和一个字符，表示在指定次数范围内找到字符。 a{3}表示:三个a、
+ a{1,3}表示:一个到三个a、
+ a{3,} 表示:大于等于三个a、
+ {3，7，a}表示在3到7次重复范围内匹配字符a。
+ [] 集合,代表方括号中任意一个字符。 [ab] 表示:a或者b都可以、
+ [a-z] 表示:从a到z的字符。
+ () 组,代表一组字符。 (ab){2}表示:abab。
+ a/b 同时满足。 a/b表示:字符串a后跟字符串b才能满足要求。
+ a|b 并列,代表符合a或者符合b都可以 a|b表示: 字符串a或者字符串b都满足要求。
+ ^ 如果放在开头表示代表该规则必须在字符串的开头，其他位置代表字符本身。
+ 如果放在[]中的开头表示对该集合取反,其他位置代表字符本身。 ^a表示:a必须在字符串的开头、
+ [^a]表示:除了a以外的其他字符。
+ $ 如果放在最后表示该规则必须放在最后,其他位置代表字符本身。 a$表示:a必须在字符串最后。
+ /:s 正则表达式用 /:s 表示空格。 a/:sb 匹配 a b。
+ /:a 正则表达式用 /:a 表示字符与数字。 a/:a 匹配 ab、a6 等。
+ /:c 正则表达式用 /:c 仅表示字符。 a/:c 匹配 ac等，不匹配a1等。
+ /:p 正则表达式用 /:p 表示可打印字符。
+ /:D 正则表达式用 /:d 仅表示数字。 a/:c 匹配 a1等，不匹配ac等。
+ /:x00 正则表达式用 /:x00 表示ASCII字符。
+ /:r 正则表达式用 /:r 表示回车。
+ /:N 正则表达式用 /:d 表示换行。
+ 
+*/
 void test_regex()
 {
-    const char *log = "123vvcvcvabc";
+    const char *log = "Jan 20 01:12:44 swiftc iaptransportd[69] <Warning>: CIapPortAppleIDBus: Auth timer timeout completed on pAIDBPort:0x15c612140, portID:01 downstream port";
     regex_t reg;
-    char regex[] = "^[0-9]?";
+    char regex[] = "(\\w+\\s+\\d+\\s+\\d+:\\d+:\\d+)\\s+(\\S+|)\\s+(\\w+)\\[(\\d+)\\]\\s+\\<(\\w+)\\>:\\s(.*)";
     size_t nmatch = 1;
     regmatch_t pmatch[1];
     char errbuf[100];
     int re;
     
     // Compile regex to reg
-    re = regcomp(&reg, regex, REG_EXTENDED | REG_NEWLINE);
+    //re = regcomp(&reg, regex, REG_EXTENDED |cREG_NEWLINE);
+    re = regcomp(&reg, regex, REG_NEWLINE | REG_NOSUB);
     if (0 != re) {
         regerror(re, &reg, errbuf, 100);
         printf("regcomp err: %s\n", errbuf);
@@ -249,14 +282,15 @@ void handle_log(sds log)
         }
     } else {
         
-//        printf("%s\n", log);
+        //printf("%s\n", log);
+        //get_process_name(log);
 //        size_t keyword_len = strlen(cfg.filter_in_keyword);
 //        if (memcmp(log, cfg.filter_in_keyword, keyword_len) == 0) {
 //            printf("%s\n", log);
 //        }
-        if (strstr(log, "xxooxxooxxoo = ") != 0) {
-            wprintf("%s\n", (wchar_t *)log);
-        }
+        //if (strstr(log, "xxooxxooxxoo = ") != 0) {
+//            wprintf(L"%s\n", (wchar_t *)log);
+        //}
     }
     
 //    const char * process_name = get_process_name(log);
@@ -272,8 +306,11 @@ void log_callback(sds log)
 
 int main(int argc, const char * argv[])
 {
-    char *local = setlocale(LC_ALL, "");
-    printf("local: %s\n", local);
+//    char *local = setlocale(LC_ALL, "");
+//    printf("local: %s\n", local);
+    
+    test_regex();
+    return 0;
     
     cfg.show_date_and_name = true;
     cfg.show_process_name = true;
