@@ -20,17 +20,17 @@ CFMutableArrayRef get_device_ids()
     char **dev_list = NULL;
     char *device_name = NULL;
     int ret = 0;
-    int i;
+    int count = 0;
     const char* udid = NULL;
     
-    if (idevice_get_device_list(&dev_list, &i) < 0) {
+    if (idevice_get_device_list(&dev_list, &count) < 0) {
         fprintf(stderr, "ERROR: Unable to retrieve device list!\n");
         return NULL;
     }
     
     CFMutableArrayRef arr = CFArrayCreateMutable(kCFAllocatorDefault, 0, NULL);
     
-    for (i = 0; dev_list[i] != NULL; i++) {
+    for (int i = 0; i < count-1; i++) {
         udid = dev_list[i];
         idevice_new(&device, udid);
         if (!device) {
