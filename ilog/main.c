@@ -249,14 +249,14 @@ void handle_log(sds log)
         }
     } else {
         
-//        printf("%s\n", log);
+        printf("%s\n", log);
 //        size_t keyword_len = strlen(cfg.filter_in_keyword);
 //        if (memcmp(log, cfg.filter_in_keyword, keyword_len) == 0) {
 //            printf("%s\n", log);
 //        }
-        if (strstr(log, "xxooxxooxxoo = ") != 0) {
-            wprintf("%s\n", (wchar_t *)log);
-        }
+//        if (strstr(log, "xxooxxooxxoo = ") != 0) {
+//            wprintf("%s\n", (wchar_t *)log);
+//        }
     }
     
 //    const char * process_name = get_process_name(log);
@@ -272,8 +272,8 @@ void log_callback(sds log)
 
 int main(int argc, const char * argv[])
 {
-    char *local = setlocale(LC_ALL, "");
-    printf("local: %s\n", local);
+//    char *local = setlocale(LC_ALL, "");
+//    printf("local: %s\n", local);
     
     cfg.show_date_and_name = true;
     cfg.show_process_name = true;
@@ -284,12 +284,12 @@ int main(int argc, const char * argv[])
     cfg.filter_in_ps_list[1] = "com.mobyapps.watchdogd";
     
     CFMutableArrayRef arr = get_device_ids();
-    CFIndex count = CFArrayGetCount(arr);
     
     if (arr == NULL) {
         printf("find iOS device failed\n");
         return 1;
     }
+    CFIndex count = CFArrayGetCount(arr);
     if (count == 0) {
         printf("no iOS device connected\n");
         CFRelease(arr);
