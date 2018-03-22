@@ -13,7 +13,6 @@
 		001B13331FFF49D100D440DD /* libplist.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001B131C1FFF49D100D440DD /* libplist.a */; };
 		001B13341FFF49D200D440DD /* libusbmuxd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001B132D1FFF49D100D440DD /* libusbmuxd.a */; };
 		001B13371FFF746700D440DD /* device_log.c in Sources */ = {isa = PBXBuildFile; fileRef = 001B13351FFF746700D440DD /* device_log.c */; };
-		004FBCBD1FFE2AB100EA2CFE /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 004FBCBC1FFE2AB100EA2CFE /* main.c */; };
 		004FBD0B1FFF1DC700EA2CFE /* device_id.c in Sources */ = {isa = PBXBuildFile; fileRef = 004FBD091FFF1DC700EA2CFE /* device_id.c */; };
 		00CCA268206396B800B2D197 /* RegExpr.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CCA267206396B800B2D197 /* RegExpr.m */; };
 		00EC6C7420593AF3003FEDDF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 00EC6C7320593AF3003FEDDF /* main.m */; };
@@ -158,7 +157,6 @@
 		001B13351FFF746700D440DD /* device_log.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = device_log.c; sourceTree = "<group>"; };
 		001B13361FFF746700D440DD /* device_log.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = device_log.h; sourceTree = "<group>"; };
 		004FBCB91FFE2AB100EA2CFE /* ilog */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ilog; sourceTree = BUILT_PRODUCTS_DIR; };
-		004FBCBC1FFE2AB100EA2CFE /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		004FBD091FFF1DC700EA2CFE /* device_id.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = device_id.c; sourceTree = "<group>"; };
 		004FBD0A1FFF1DC700EA2CFE /* device_id.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = device_id.h; sourceTree = "<group>"; };
 		00CCA266206396B800B2D197 /* RegExpr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegExpr.h; sourceTree = "<group>"; };
@@ -398,7 +396,6 @@
 			isa = PBXGroup;
 			children = (
 				001B12B01FFF49D100D440DD /* lib */,
-				004FBCBC1FFE2AB100EA2CFE /* main.c */,
 				00EC6C7320593AF3003FEDDF /* main.m */,
 				00CCA266206396B800B2D197 /* RegExpr.h */,
 				00CCA267206396B800B2D197 /* RegExpr.m */,
@@ -485,7 +482,6 @@
 				001B13371FFF746700D440DD /* device_log.c in Sources */,
 				00ED1922200468F000C0659F /* color_log.c in Sources */,
 				00EC6C7420593AF3003FEDDF /* main.m in Sources */,
-				004FBCBD1FFE2AB100EA2CFE /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
