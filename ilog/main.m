@@ -47,13 +47,13 @@ int main(int argc, const char * argv[]) {
     CFMutableArrayRef arr = get_device_ids();
     
     if (arr == NULL) {
-        printf("find iOS device failed\n");
+        printf("Find iOS device failed\n");
         return 1;
     }
     
     CFIndex count = CFArrayGetCount(arr);
     if (count == 0) {
-        printf("no iOS device connected\n");
+        printf("No iOS device connected\n");
         CFRelease(arr);
         return 2;
     } else if (count == 1) {
@@ -68,13 +68,13 @@ int main(int argc, const char * argv[]) {
         }
         
         printf(COLOR_GREEN);
-        printf("choose an iOS device\n");
+        printf("Choose an iOS device\n");
         printf(COLOR_RESET);
         int c = 0;
         scanf("%d", &c);
         if (c < 0 || c >= count) {
             printf(COLOR_RED);
-            printf("choose err\n");
+            printf("Choose err\n");
             printf(COLOR_RESET);
             exit(3);
         } else {
