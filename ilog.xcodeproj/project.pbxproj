@@ -15,6 +15,8 @@
 		001B13371FFF746700D440DD /* device_log.c in Sources */ = {isa = PBXBuildFile; fileRef = 001B13351FFF746700D440DD /* device_log.c */; };
 		004FBCBD1FFE2AB100EA2CFE /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 004FBCBC1FFE2AB100EA2CFE /* main.c */; };
 		004FBD0B1FFF1DC700EA2CFE /* device_id.c in Sources */ = {isa = PBXBuildFile; fileRef = 004FBD091FFF1DC700EA2CFE /* device_id.c */; };
+		00CCA268206396B800B2D197 /* RegExpr.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CCA267206396B800B2D197 /* RegExpr.m */; };
+		00EC6C7420593AF3003FEDDF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 00EC6C7320593AF3003FEDDF /* main.m */; };
 		00ED191F20035A1700C0659F /* sds.c in Sources */ = {isa = PBXBuildFile; fileRef = 00ED191D20035A1700C0659F /* sds.c */; };
 		00ED1922200468F000C0659F /* color_log.c in Sources */ = {isa = PBXBuildFile; fileRef = 00ED1920200468F000C0659F /* color_log.c */; };
 		00ED19242004C9B800C0659F /* ilog in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FBCB91FFE2AB100EA2CFE /* ilog */; };
@@ -159,6 +161,10 @@
 		004FBCBC1FFE2AB100EA2CFE /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		004FBD091FFF1DC700EA2CFE /* device_id.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = device_id.c; sourceTree = "<group>"; };
 		004FBD0A1FFF1DC700EA2CFE /* device_id.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = device_id.h; sourceTree = "<group>"; };
+		00CCA266206396B800B2D197 /* RegExpr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegExpr.h; sourceTree = "<group>"; };
+		00CCA267206396B800B2D197 /* RegExpr.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegExpr.m; sourceTree = "<group>"; };
+		00EC6C7120593473003FEDDF /* libpcre.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libpcre.tbd; path = usr/lib/libpcre.tbd; sourceTree = SDKROOT; };
+		00EC6C7320593AF3003FEDDF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		00ED191D20035A1700C0659F /* sds.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sds.c; sourceTree = "<group>"; };
 		00ED191E20035A1700C0659F /* sds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sds.h; sourceTree = "<group>"; };
 		00ED1920200468F000C0659F /* color_log.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = color_log.c; sourceTree = "<group>"; };
@@ -393,6 +399,9 @@
 			children = (
 				001B12B01FFF49D100D440DD /* lib */,
 				004FBCBC1FFE2AB100EA2CFE /* main.c */,
+				00EC6C7320593AF3003FEDDF /* main.m */,
+				00CCA266206396B800B2D197 /* RegExpr.h */,
+				00CCA267206396B800B2D197 /* RegExpr.m */,
 				00ED191D20035A1700C0659F /* sds.c */,
 				00ED191E20035A1700C0659F /* sds.h */,
 				004FBD0A1FFF1DC700EA2CFE /* device_id.h */,
@@ -408,6 +417,7 @@
 		004FBCC31FFE2B0000EA2CFE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				00EC6C7120593473003FEDDF /* libpcre.tbd */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -471,8 +481,10 @@
 			files = (
 				00ED191F20035A1700C0659F /* sds.c in Sources */,
 				004FBD0B1FFF1DC700EA2CFE /* device_id.c in Sources */,
+				00CCA268206396B800B2D197 /* RegExpr.m in Sources */,
 				001B13371FFF746700D440DD /* device_log.c in Sources */,
 				00ED1922200468F000C0659F /* color_log.c in Sources */,
+				00EC6C7420593AF3003FEDDF /* main.m in Sources */,
 				004FBCBD1FFE2AB100EA2CFE /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -587,6 +599,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2YPNT4LMNL;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -608,6 +621,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WARNING_LDFLAGS = "";
 			};
 			name = Debug;
@@ -616,6 +630,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2YPNT4LMNL;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -637,6 +652,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WARNING_LDFLAGS = "";
 			};
 			name = Release;

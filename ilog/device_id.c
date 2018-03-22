@@ -30,7 +30,7 @@ CFMutableArrayRef get_device_ids()
     
     CFMutableArrayRef arr = CFArrayCreateMutable(kCFAllocatorDefault, 0, NULL);
     
-    for (int i = 0; i < count-1; i++) {
+    for (int i = 0; dev_list[i] != NULL; i++) {
         udid = dev_list[i];
         idevice_new(&device, udid);
         if (!device) {
