@@ -31,40 +31,58 @@
     return self;
 }
 
-- (LogHead)getHead:(NSString *)log {
+- (Log)getLog:(NSString *)logStr {
     
-    __block LogHead head;
-    memset(&head, 0x0, sizeof(LogHead));
+    __block Log log;
+    memset(&log, 0x0, sizeof(log));
     
-    if (log == nil || [log length] == 0) {
-        return head;
+    if (logStr == nil || [logStr length] == 0) {
+        return log;
     }
-    NSRange range = NSMakeRange(0, log.length);
+    NSRange range = NSMakeRange(0, logStr.length);
     
-    [self.regExpr enumerateMatchesInString:log options:NSMatchingReportProgress range:range usingBlock:^(NSTextCheckingResult * _Nullable result, NSMatchingFlags flags, BOOL * _Nonnull stop) {
+    NSArray<NSTextCheckingResult *> * results = [self.regExpr matchesInString:logStr options:NSMatchingReportProgress range:range];
+    
+    for (int i = 0; i < results.count; ++i) {
         
+        NSTextCheckingResult *result = results[i];
         NSUInteger cnt = result.numberOfRanges;
-        for (int i = 1; i < cnt; i++) {
-            const char *str = [log substringWithRange:[result rangeAtIndex:i]].UTF8String;
-            switch (i) {
+        NSRange logHeadRng = result.range;
+        NSString *logHead = [logStr substringWithRange:logHeadRng];
+        NSRange logContentRng = NSMakeRange(logHeadRng.length+1, [logStr length]-logHeadRng.length-1);
+        NSString *logContent = [logStr substringWithRange:logContentRng];
+//        printf("h:%s\n", logHead.UTF8String);
+//        printf("c:%s\n", logContent.UTF8String);
+        
+        log.content = logContent.UTF8String;
+        
+        LogHead head;
+        memset(&head, 0x0, sizeof(LogHead));
+        
+        for (int j = 0; j < cnt; ++j) {
+            NSRange subRng = [result rangeAtIndex:j];
+            const char *subStr = [logHead substringWithRange:subRng].UTF8String;
+            //printf("%d == %s\n", j, subStr.UTF8String);
+            switch (j) {
                 case 1:
-                    head.date = str;
+                    head.date = subStr;
                     break;
                 case 2:
-                    head.device = str;
+                    head.device = subStr;
                     break;
                 case 3:
-                    head.process = str;
+                    head.process = subStr;
                     break;
                 case 4:
-                    head.level = str;
+                    head.level = subStr;
                     break;
                 default:
                     break;
             }
         }
-    }];
-    return head;
+        log.head = head;
+    }
+    return log;
 }
 
 @end

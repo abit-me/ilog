@@ -17,7 +17,6 @@
 		00CCA268206396B800B2D197 /* RegExpr.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CCA267206396B800B2D197 /* RegExpr.m */; };
 		00EC6C7420593AF3003FEDDF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 00EC6C7320593AF3003FEDDF /* main.m */; };
 		00ED191F20035A1700C0659F /* sds.c in Sources */ = {isa = PBXBuildFile; fileRef = 00ED191D20035A1700C0659F /* sds.c */; };
-		00ED1922200468F000C0659F /* color_log.c in Sources */ = {isa = PBXBuildFile; fileRef = 00ED1920200468F000C0659F /* color_log.c */; };
 		00ED19242004C9B800C0659F /* ilog in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FBCB91FFE2AB100EA2CFE /* ilog */; };
 /* End PBXBuildFile section */
 
@@ -165,8 +164,8 @@
 		00EC6C7320593AF3003FEDDF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		00ED191D20035A1700C0659F /* sds.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sds.c; sourceTree = "<group>"; };
 		00ED191E20035A1700C0659F /* sds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sds.h; sourceTree = "<group>"; };
-		00ED1920200468F000C0659F /* color_log.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = color_log.c; sourceTree = "<group>"; };
-		00ED1921200468F000C0659F /* color_log.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = color_log.h; sourceTree = "<group>"; };
+		00F9E9922064C2E1005FB9AD /* log_cfg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = log_cfg.h; sourceTree = "<group>"; };
+		00F9E9932064DA3C005FB9AD /* log_color.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = log_color.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -403,10 +402,10 @@
 				00ED191E20035A1700C0659F /* sds.h */,
 				004FBD0A1FFF1DC700EA2CFE /* device_id.h */,
 				004FBD091FFF1DC700EA2CFE /* device_id.c */,
-				00ED1921200468F000C0659F /* color_log.h */,
-				00ED1920200468F000C0659F /* color_log.c */,
 				001B13361FFF746700D440DD /* device_log.h */,
 				001B13351FFF746700D440DD /* device_log.c */,
+				00F9E9922064C2E1005FB9AD /* log_cfg.h */,
+				00F9E9932064DA3C005FB9AD /* log_color.h */,
 			);
 			path = ilog;
 			sourceTree = "<group>";
@@ -480,7 +479,6 @@
 				004FBD0B1FFF1DC700EA2CFE /* device_id.c in Sources */,
 				00CCA268206396B800B2D197 /* RegExpr.m in Sources */,
 				001B13371FFF746700D440DD /* device_log.c in Sources */,
-				00ED1922200468F000C0659F /* color_log.c in Sources */,
 				00EC6C7420593AF3003FEDDF /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

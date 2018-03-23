@@ -1,15 +1,13 @@
 //
-//  color_log.h
+//  log_color.h
 //  ilog
 //
-//  Created by A on 2018/1/9.
+//  Created by A on 2018/3/23.
 //  Copyright © 2018年 A. All rights reserved.
 //
 
-#ifndef color_log_h
-#define color_log_h
-
-#include <stdio.h>
+#ifndef log_color_h
+#define log_color_h
 
 #define COLOR_RESET         "\e[m"
 #define COLOR_NORMAL        "\e[0m"
@@ -29,4 +27,4 @@
 #define COLOR_WHITE         "\e[0;37m"
 #define COLOR_DARK_WHITE    "\e[0;37m"
 
-#endif /* color_log_h */
+#endif /* log_color_h */

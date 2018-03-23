@@ -16,6 +16,12 @@ typedef struct
     const char *level;
 } LogHead;
 
+typedef struct {
+    
+    LogHead     head;
+    const char *content;
+} Log;
+
 @interface RegExpr : NSObject
-- (LogHead)getHead:(NSString *)log;
+- (Log)getLog:(NSString *)log;
 @end
